@@ -1,0 +1,14 @@
+import os
+import csv
+import re
+
+def extract_info(cif_content):
+    # Extract band gap
+    bandgap_match = re.search(r'# Bandgap, HSE06 \(eV\):\s*(\d+\.\d+)', cif_content)
+    bandgap = float(bandgap_match.group(1)) if bandgap_match else None
+
+    # Extract compound name
+    name_match = re.search(r'# Label:\s*(.+)', cif_content)
+    compound_name = name_match.group(1).strip() if name_match else None
+
+    return compound_name, bandgap
